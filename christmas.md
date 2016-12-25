@@ -1,6 +1,7 @@
 #christmas
 
-A vertical scrolling Christmas trees with the text `~Merry Chirstmas~`.
+Vertical scrolling Christmas trees together with the greeting `~Merry Chirstmas~`. 
+The trees are created with the characters from the greeting text.
 
 Originally created to fit in a single tweet (max 140 characters): https://twitter.com/pkitslaar/status/812673564994371584
 
