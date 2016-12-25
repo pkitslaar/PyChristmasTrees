@@ -1,10 +1,10 @@
 #christmas
 
-A vertical scrolling Christmas trees with the text *Merry Chirstmas*.
+A vertical scrolling Christmas trees with the text `~Merry Chirstmas~`.
 
-Originally created as a tweet at: https://twitter.com/pkitslaar/status/812673564994371584
+Originally created to fit in a single tweet (max 140 characters): https://twitter.com/pkitslaar/status/812673564994371584
 
-The code uses the `f-string` syntax introduced in Python 3.6.0.
+The code uses the [f-string](https://docs.python.org/3.6/reference/lexical_analysis.html#f-strings) syntax introduced in [Python](https://www.python.org/) 3.6.0.
 
 ##Code
 
@@ -22,40 +22,51 @@ for C in t:
 
 ##Description
 
+Below is a line-by-line description of the code.
+
+###Line 1
+
 > ```python
 t='~Merry Christmas~'
 ```
 
-Define the text string with the message and the collection of characters used to fill the chirstmas trees.
+Defines the main mesage of the script and will later also be used as the collection of characters used to draw the Christmas trees.
+
+###Line 2
 
 > ```python
 b,s='|!'
 ```
 
-Store the 'special' characters `|` and `!` as the variables `b` and `s`.
-Shorter notation than
+Store the 'special' characters `'|'` and `'!'` as the variables `b` (from boom in Dutch) and `s` (don't know, maybe from special). Since we assing these to single letter variables we can use these instead of the literal character string. This saves 2 tokens per character. Furthermore, since the tuple unpacking notation is used we save another 3 characters with respect to standard assingment, like
 ```python
-b = '|'
-s = '!'
+b='|'
+s='!'
 ```
+
+###Line 3
 
 > ```python
 for C in t:
 ```
 
 Outer loop. Each iteration here results in a new tree being output. 
-The `C` character is the character used to fill the tree.
+The `C` (upper-case) character is the character used to fill the tree.
+
+###Line 4
 
 > ```python
  for (i,c) in enumerate(t+'||!'):
 ```
 
-Inner loop. Which produces all the lines in the tree.
-Loops over the characters in `t` plus an additional number of `|` and `!` characters.
-These have special meaning as can be seen in the next section.
+Inner loop. Each iteration here produces a single line in the tree.
 
-* `i` : line number of the tree
-* `c` : current character from the text
+The enumerate yields a character `c` and the index (as an integer) of the character `i`.
+The loops runs over the characters in `t` plus an two `'|'` characters and finally `'!'` character.
+
+>> It can be seen that the brackets `(` and `)` are actually not needed for the tuple unpacking, so the code could be two characters shorter.
+
+###Line 5
 
 > ```python
   print(f"{ {s:t,b:b}.get(c,f'{c} {i*C} {c}'):^25}")
@@ -69,7 +80,7 @@ This string is the interesting part.
 f"{ {s:t,b:b}.get(c,f'{c} {i*C} {c}'):^25}"
 ```
 
-If we look at the `{` and `}` characted we see there are a number of levels of expressions that are being evaluated.
+If we look at the various `{` and `}` characters we see there are a number of levels of expressions that are being evaluated.
 
 At the outermost level we can look at the string as
 
@@ -117,26 +128,27 @@ Next, we look at the right side of the `.`
 
 Here we call the `get` method on the dictionary with as first argument the value of `c`, so the current character from the inner loop.
 
-The `get` method does a lookup in the dictionary and returns the corresponding value if found. The the key is not found in the dictionary the second argument of `get` is returned.
+The `get` method does a lookup in the dictionary and returns the corresponding value if found. If the key is not found in the dictionary the second argument of `get` is returned.
 
-In this case the second argument is another f-string:
+In this case the second argument is another `f-string`. Notice it is enclosed in single-quotes, since the outer `f-string`
+is enclosed with double-quotes (`"`):
 
 ```python
 f'{c} {i*C} {c}'
 ```
 
-This code formats the actual lines of the tree. Inside ther are 2 distinct expressions that are used
+This code formats the actual lines of the tree. Inside there are two distinct expressions that are used
 
 * `{c}`   : simply prints the current value of `c`
-* `{i*C}` : Repeats (using the `*` operator) the value of `C` (note capital) for `i` times.
+* `{i*C}` : Repeats (using the `*` operator) the value of `C` (upper-case) for `i` times.
 
 Due to the two loops we get a new value for `C` (upper-case) for every tree, and a new value of `c` (lower-case) and `i` for every line in the tree.
 
-Here are a few example lines for different value of `C`, `c` and `i`.
+Here are a few example results for this `f-string` for different values of `C`, `c` and `i`:
 
 ```
 C  c  i  Line
--  -  -  ---------------------
+-  -  -  ----
 M  m  0  m  m
 M  m  1  m M m
 M  m  2  m MM m
@@ -144,7 +156,7 @@ M  m  3  m MMM m
 ~  e  5  e ~~~~~ e
 ```
 
-So, looking back a the line
+So, looking back a the expression
 
 ```python
 {s:t,b:b}.get(c,f'{c} {i*C} {c}')
@@ -152,9 +164,9 @@ So, looking back a the line
 
 We see this produces the following results
 
-* If `c` == `|`, it will simply return `|` again. Which will become the trunk of the tree.
-* If `c` == `!`, it will return the full text of `t`, so `'~Merry Christmas~`. Which is the closing mesage of each tree.
-* In the other cases, the value of `c` is not in the dictionary and the second argument to `get` is returned.
+* If `c` == `'|'`, it will simply return `'|'` again. Which will become the trunk of the tree.
+* If `c` == `'!'`, it will return the full text of `t`, so `'~Merry Christmas~`. Which is the closing mesage of each tree.
+* In the other cases, the value of `c` will not be foud in the dictionary and the second argument to the `get` method is returned.
 
-Finally, this result is centered to `25` characters using the outer-most f-string.
+Finally, each of these results are centered inside a `25` character width string using the outer-most `f-string`.
 
