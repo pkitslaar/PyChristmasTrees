@@ -63,7 +63,7 @@ The `C` (upper-case) character is the character used to fill the tree.
 Inner loop. Each iteration here produces a single line in the tree.
 
 The enumerate yields a character `c` and the index (as an integer) of the character `i`.
-The loops runs over the characters in `t` plus an two `'|'` characters and finally `'!'` character.
+The loops runs over the characters in `t` plus two `'|'` characters and a `'!'` character.
 
 >> It can be seen that the brackets `(` and `)` are actually not needed for the tuple unpacking, so the code could be two characters shorter.
 
