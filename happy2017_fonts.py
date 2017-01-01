@@ -41,7 +41,7 @@ def toHex(characters):
 	  bit_pattern = row.replace(' ', '0').replace('x', '1')
 	  value = int(f'{bit_pattern}', 2)
 	  c = chr(60+value)
-	  #print(i, row, bit_pattern, value, c)
+	  #print(i, row, bit_pattern, value, chr(value), value+60, c)
 	  hex_values.append(c)
   return ''.join(hex_values)
 
