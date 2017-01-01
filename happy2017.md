@@ -53,7 +53,7 @@ XXXXXX  XXXX   XXXXX   X
 
 It would take too much space in the code snippet to spell out all the characters. The above text already occupies 175 characters/bytes. 
 
-First, we isolate each digit and handle this. Let`s look at the `2`.
+First, we isolate each digit and handle this. Let's look at the `2`.
 Here we also number the columns and rows in the grid.
 
 ```
