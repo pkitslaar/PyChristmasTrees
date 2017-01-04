@@ -159,7 +159,7 @@ f'{ord(c)-60:06b}0'
 ```
 
 The `f-string` contains the expression `ord(c)-60` inside the braces left of the `:`.
-This takes the character calls the `ord` method with argument `c`. This converting the 
+This calls the `ord` method with argument `c`. This converts the 
 character to its Unicode code point value. As mentioned in the encoding part, we altered the
 value of the bit-pattern before converting it to a character by adding `60`. Therefor, we
 here subtract the `60` again to obtain the original value of the bit-pattern.
@@ -170,9 +170,11 @@ The to right of the `:` we see the format specifiers `06b`. The easiest is the r
  * `6` : Make sure the string is a least `6` characters wide.
  * `0` : Use the `'0'` character to pad the string if needed to fill to the defined width of `6`.`6`.`6`.`6`.`6`.`6`.
 
+Finally, the `f-string` ends with a standard `'0'`.
 
+The result of this expression for the `'z'` character (the first encoded row from `2`) is:
 
-
-
-
+```python
+'1111100'
+```
 
