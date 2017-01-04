@@ -1,4 +1,6 @@
-#christmas
+# Christmas Trees
+
+[Back](README.md)
 
 Vertical scrolling Christmas trees together with the greeting `~Merry Chirstmas~`. 
 The trees are created with the characters from the greeting text.
@@ -7,7 +9,7 @@ Originally created to fit in a single tweet (max 140 characters): https://twitte
 
 The code uses the [f-string](https://docs.python.org/3.6/reference/lexical_analysis.html#f-strings) syntax introduced in [Python](https://www.python.org/) 3.6.0.
 
-##Code
+## Code
 
 ```python
 t='~Merry Christmas~'
@@ -17,15 +19,15 @@ for C in t:
   print(f"{ {s:t,b:b}.get(c,f'{c} {i*C} {c}'):^25}")
 ```
 
-##Output
+## Output
 
 ![Animated GIF of christmas.py console output](christmas.gif)
 
-##Description
+## Description
 
 Below is a line-by-line description of the code.
 
-###Line 1
+### Line 1
 
 > ```python
 t='~Merry Christmas~'
@@ -45,20 +47,20 @@ b='|'
 s='!'
 ```
 
-###Line 3
+### Line 3
 
 > ```python
-for C in t:
-```
-
+> for C in t:
+> ```
+ 
 Outer loop. Each iteration here results in a new tree being output. 
 The `C` (upper-case) character is the character used to fill the tree.
 
-###Line 4
+### Line 4
 
 > ```python
- for (i,c) in enumerate(t+'||!'):
-```
+>  for (i,c) in enumerate(t+'||!'):
+> ```
 
 Inner loop. Each iteration here produces a single line in the tree.
 
@@ -67,11 +69,11 @@ The loops runs over the characters in `t` plus two `'|'` characters and a `'!'` 
 
 >> It can be seen that the brackets `(` and `)` are actually not needed for the tuple unpacking, so the code could be two characters shorter.
 
-###Line 5
+### Line 5
 
 > ```python
-  print(f"{ {s:t,b:b}.get(c,f'{c} {i*C} {c}'):^25}")
-```
+>   print(f"{ {s:t,b:b}.get(c,f'{c} {i*C} {c}'):^25}")
+> ```
 
 This is the main body of the script which contains the most logic.
 The line contains a `print` function call with a single `f-string` as argument.
