@@ -208,6 +208,7 @@ The first thing this does is the `''.join( ... )` call. Which simply takes the g
 concatinates them into a single string.
 
 Next, we look at the part:
+
 ```python
 .translate({48:32,49:v})
 ```
