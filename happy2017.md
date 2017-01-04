@@ -1,21 +1,21 @@
-#Happy 2017
+# Happy 2017
 
 Prints `2017` in big fonts with varying fill characters.
 
 Created as a tweet, so needed to fit in 140 characters: https://twitter.com/pkitslaar/status/815238499175538688
 
-##Code
+## Code
 
 ```python
 for v in '~Xx*':
  print(''.join({'!':'\n'}.get(c,f'{ord(c)-60:06b}0') for c in '!zZB{!]]F>!>]N@!@]>D!L]>D!{Z[D').translate({48:32,49:v}))
 ```
 
-##Output
+## Output
 
 ![Animated GIF of happy2017.py console output](happy2017.gif)
 
-##Description
+## Description
 
 The main part of this snippet revolves around the creation of the big 2017 characters. They are encoded in the large string enclosed in the generator expression on the second line.
 
@@ -38,7 +38,7 @@ We will ignore the `!` in the string for now, they have a special meaning we wil
 
 These codes are obtained from the (happy2017_fonts.py) script.
 
-###font encoding
+### Encoding
 
 In the final script the goal is to create large characters to spell the year `2017`. Like
 
@@ -124,7 +124,7 @@ The fist column in the output is the encoded character
 the following columns define the symbolds that encode the bit pattern
 for each row.
 
-##Decoding
+### Decoding
 
 Let's look again at the character groups we isolated before.
 
@@ -168,7 +168,7 @@ The to right of the `:` we see the format specifiers `06b`. The easiest is the r
 
  * `b` : Convert the value to a binary string format e.g. `'00110101'`
  * `6` : Make sure the string is a least `6` characters wide.
- * `0` : Use the `'0'` character to pad the string if needed to fill to the defined width of `6`.`6`.`6`.`6`.`6`.`6`.
+ * `0` : Use the `'0'` character to pad the string if needed to fill to the defined width of 6 characters.
 
 Finally, the `f-string` ends with a standard `'0'`.
 
@@ -177,4 +177,52 @@ The result of this expression for the `'z'` character (the first encoded row fro
 ```python
 '1111100'
 ```
+
+For every `!` in the data string a `\n` is returned. Therefor, the first 7 characters on the data string decode to:
+
+```
+!  z        Z        B        {        ! 
+-  -------- -------- -------- -------- --
+\n 111110 0 011110 0 000110 0 111111 0 \n
+```
+
+So the expression
+```python
+{'!':'\n'}.get(c,f'{ord(c)-60:06b}0') for c in '!zZB{!]]F>!>]N@!@]>D!L]>D!{Z[D'
+```
+
+results in a sequence of characters with values `'0'`, `'1'` or `'\n'`.
+
+### Filling
+Lets look back at the second line of the snippet. We just covered the internal part, which is replaced with `...` in the code below.
+
+```python
+ print(''.join( ... ).translate({48:32,49:v}))
+```
+
+The first thing this does is the `''.join( ... )` call. Which simply takes the generated sequences of characters in `...` and
+concatinates them into a single string.
+
+Next, we look at the `.translate({48:32,49:v})` part.
+This calls the `translate` method on the concatinated string. Below is the help text for `str.translate`. 
+
+```
+translate(...)
+    S.translate(table) -> str
+        
+    Return a copy of the string S in which each character has been mapped
+    through the given translation table. The table must implement
+    lookup/indexing via __getitem__, for instance a dictionary or list,
+    mapping Unicode ordinals to Unicode ordinals, strings, or None. If
+    this operation raises LookupError, the character is left untouched.
+    Characters mapped to None are deleted.
+```
+
+The table that is used contains two entries
+
+ * `48` : Which is the Unicode ordinal for the character `'0'`, which is mapped to `32` the Unicode ordinal for `' '` (space).
+ * `39` : The Unicode ordinal for the character `'1'`, which is mapped to `v`. This is the value as provided by the loop on line 1.
+
+This means that every `'0'` in the concatinated string is converted to a `' '` and every `'1'` is converted to the value of `v`.
+The new line characters (`'\n'`) in the string are left untouched since no entry is present in the table.
 
