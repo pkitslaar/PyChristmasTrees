@@ -110,7 +110,7 @@ Also the original ASCII character and the value and character of the value plus 
 5 xxxxxx 111111 63     ?    123  '{'
 ```
 
-Based on this, we can interpret the output of the `happy2017_fonts.py` script.
+Now we can interpret the output of the `happy2017_fonts.py` script.
 
 ```bash
 $ python happy2017_fonts.py
@@ -119,4 +119,60 @@ $ python happy2017_fonts.py
 1 BFN>>[
 7 {>@DDD
 ```
+
+The fist column in the output is the encoded character 
+the following columns define the symbolds that encode the bit pattern
+for each row.
+
+##Decoding
+
+Let's look again at the character groups we isolated before.
+
+```python
+'zZB{'
+']]F>'
+'>]N@'
+'@]>D'
+'L]>D'
+'{Z[D'
+```
+
+If we look close we see that the first character of each group comes from the encoding of the character `2`.
+The second characer in each group comes from the character `0`, etc.
+
+So, the first group contains the encoded bit pattern for the first rows of all the characters `2`,`0`,`1` and `7`.
+
+Let's look at the part of the code that deals with the encoded data.
+
+```python
+{'!':'\n'}.get(c,f'{ord(c)-60:06b}0') for c in '!zZB{!]]F>!>]N@!@]>D!L]>D!{Z[D'
+```
+
+The first part simply defines a dictionary with a single entry mapping `'!'` to `'\n'`.
+
+Next, there is a `get` call on the dictionary with the key `c` which iterates over all the characters (including the `'!'`) in the
+encoded data string. The `get` has a second argument which is the value it returns when the key `c` is not found in the dictionary.
+The real decoding part takes place in this second argument which is a  `f-string` definition 
+
+```python
+f'{ord(c)-60:06b}0'
+```
+
+The `f-string` contains the expression `ord(c)-60` inside the braces left of the `:`.
+This takes the character calls the `ord` method with argument `c`. This converting the 
+character to its Unicode code point value. As mentioned in the encoding part, we altered the
+value of the bit-pattern before converting it to a character by adding `60`. Therefor, we
+here subtract the `60` again to obtain the original value of the bit-pattern.
+
+The to right of the `:` we see the format specifiers `06b`. The easiest is the read these from right to left
+
+ * `b` : Convert the value to a binary string format e.g. `'00110101'`
+ * `6` : Make sure the string is a least `6` characters wide.
+ * `0` : Use the `'0'` character to pad the string if needed to fill to the defined width of `6`.`6`.`6`.`6`.`6`.`6`.
+
+
+
+
+
+
 
