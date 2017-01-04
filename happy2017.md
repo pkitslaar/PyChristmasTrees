@@ -71,14 +71,14 @@ Here we also number the columns and rows in the grid.
 
 As can be seen the digit is made of a `6x6` grid. 
 To encode this more efficiently we regard each row in the grid to be a bit pattern. 
-Here tthe `X` represents a `1` and each ` ` (space) represents a `0`. 
+Here tthe `X` represents a `'1'` and each `' '` (space) represents a `'0'`. 
 So, each row represents an 6-bits number.
 
 > **Intermezzo: Unicode and ASCII**
 > In the digital world, all text characters are represented as integer values. 
 > The most complete numbering system to represent characters is Unicode. 
-> Each character in Unicode is represented by a code pointi, which simply is a number. 
-> Almost every character in the world (real or fictional) as an Unicode code point value. 
+> Each character in Unicode is represented by a code point, which is just a number. 
+> Almost every character in the world (real or fictional) has a Unicode code point value. 
 > However, for our purpose we will only use very low numbers below 128. 
 > In this range the Unicode code points map to the old ASCII system.
 > 
@@ -112,9 +112,9 @@ Also the original ASCII character and the value and character of the value plus 
 5 xxxxxx 111111 63     ?    123  '{'
 ```
 
-Now we can interpret the output of the `happy2017_fonts.py` script.
+Now we can interpret the output of the [happy2017_fonts.py](happy2017_fonts.py) script.
 
-```bash
+```shell
 $ python happy2017_fonts.py
 2 z]>@L{
 0 Z]]]]Z
@@ -189,6 +189,7 @@ For every `!` in the data string a `\n` is returned. Therefor, the first 7 chara
 ```
 
 So the expression
+
 ```python
 {'!':'\n'}.get(c,f'{ord(c)-60:06b}0') for c in '!zZB{!]]F>!>]N@!@]>D!L]>D!{Z[D'
 ```
@@ -196,6 +197,7 @@ So the expression
 results in a sequence of characters with values `'0'`, `'1'` or `'\n'`.
 
 ### Filling
+
 Lets look back at the second line of the snippet. We just covered the internal part, which is replaced with `...` in the code below.
 
 ```python
@@ -205,7 +207,11 @@ Lets look back at the second line of the snippet. We just covered the internal p
 The first thing this does is the `''.join( ... )` call. Which simply takes the generated sequences of characters in `...` and
 concatinates them into a single string.
 
-Next, we look at the `.translate({48:32,49:v})` part.
+Next, we look at the part:
+```python
+.translate({48:32,49:v})
+```
+
 This calls the `translate` method on the concatinated string. Below is the help text for `str.translate`. 
 
 ```
