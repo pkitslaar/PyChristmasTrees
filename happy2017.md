@@ -4,7 +4,7 @@
 
 Prints `2017` in big fonts with varying fill characters.
 
-Created as a tweet, so needed to fit in 140 characters: https://twitter.com/pkitslaar/status/815238499175538688
+Created as a tweet, so needed to fit in 140 characters: <https://twitter.com/pkitslaar/status/815238499175538688>
 
 ## Code
 
