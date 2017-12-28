@@ -4,8 +4,8 @@
 
 Prints `We whish you a merry Chirstmas!` notes.
 
-Created as a [tweet](https://twitter.com/pkitslaar/status/945222840210649088). Since Twitter decided to increase the
-length of tweets to be 280 characters that is the size of the code.
+Created as a [tweet](https://twitter.com/pkitslaar/status/945222840210649088). Since Twitter [decided](https://blog.twitter.com/official/en_us/topics/product/2017/Giving-you-more-characters-to-express-yourself.html) to increase the
+length of tweets to be 280 characters, that was also the limit for the length of the code.
 
 ## Code
 
