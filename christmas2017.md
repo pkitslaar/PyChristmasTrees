@@ -89,3 +89,7 @@ The final content of `l` after the execution of this line will look like.
 'e': '----------------------------------------------------------------',
 'd': '                                                                ',
 }
+
+Since the dictionary was created using the dictionary comprehension and the keys were
+given in a fixed order the new Python 3.6+ version, will guarantee that the order is kept.
+
