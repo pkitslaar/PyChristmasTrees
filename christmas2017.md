@@ -33,7 +33,7 @@ dictionary `l`. This dictionary is the actual staff that gets printed in the las
 
 ### Line 1
 
-> ```python
+```python
 H,b='FEDCBAgfed','|'
 ```
 
@@ -46,9 +46,10 @@ Next, we will first discuss line 4, which holds the actual staff data that will 
 
 ### Line 4
 
-> ```python
+```python
 l={c:[k]*64 for k,c in zip('- '*5,H)}
 ```
+
 The variable `l` is a dictionary with keys the note names on the staff and with values a
 list of characters for each line.
 
