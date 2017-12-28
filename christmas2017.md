@@ -42,7 +42,7 @@ Here `H` defines the note names of the positions on the staff from high to low. 
 The `b` variable is used to keep a reference to the `'|'` character, which is used to indicate end of
 a bar in the staff.
 
-Next, we will first discuss line 4, which holds the actual staff data that will be printed.
+Next, we will discuss line 4, which holds the actual staff data that will be printed.
 
 ### Line 4
 
@@ -91,5 +91,15 @@ The final content of `l` after the execution of this line will look like.
 }
 
 Since the dictionary was created using the dictionary comprehension and the keys were
-given in a fixed order the new Python 3.6+ version, will guarantee that the order is kept.
+given in a fixed order the new Python 3.6+ version, retains the [order](https://docs.python.org/3.6/whatsnew/3.6.html#whatsnew36-compactdict).
 
+### Line 2
+
+This line holds the actual content to be printed "on-top" of the staff. These are the notes, the bar lines but also the 
+clef, time- and key signatures.
+
+```python
+n='&g#F3D/D4Dd|4g8gAgf|4eee|4A8ABAg|4fdd|4B8BCBA|4ge8dd|4eAf|2g'.replace(b,'|ECAf d')
+```
+
+The musical arrangment used is taken from the following [sheet music](http://www.bethsnotesplus.com/2014/07/we-wish-you-merry-christmas.html).
