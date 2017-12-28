@@ -61,6 +61,7 @@ reads as. Create a dictionary with a key from variable `c` and values `[k]*64`.
 This last part creates a list with 64 copies of the value `k`.
 
 The end part of the dictionary comprehension defines the values for `k` and `c`.
+
 ```python
 {... for k,c in zip('- '*5,H)}
 ```
@@ -76,7 +77,7 @@ The alternating `k` values, make sure that there will be lines and spaces in not
 
 The final content of `l` after the execution of this line will look like.
 
-```
+```python
 {
 'F': '----------------------------------------------------------------',
 'E': '                                                                ',
@@ -89,6 +90,7 @@ The final content of `l` after the execution of this line will look like.
 'e': '----------------------------------------------------------------',
 'd': '                                                                ',
 }
+```
 
 Since the dictionary was created using the dictionary comprehension and the keys were
 given in a fixed order the new Python 3.6+ version, retains the [order](https://docs.python.org/3.6/whatsnew/3.6.html#whatsnew36-compactdict).
@@ -103,3 +105,5 @@ n='&g#F3D/D4Dd|4g8gAgf|4eee|4A8ABAg|4fdd|4B8BCBA|4ge8dd|4eAf|2g'.replace(b,'|ECA
 ```
 
 The musical arrangment used is taken from the following [sheet music](http://www.bethsnotesplus.com/2014/07/we-wish-you-merry-christmas.html).
+
+![Sheet music](christmas2017-sheet.png)
