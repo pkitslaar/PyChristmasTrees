@@ -179,3 +179,58 @@ The last, 3 notes are all `8` notes and therefor the `8` does not need to be rep
 ### Line 8
 Here we set the value `c` in the dictionary `l` at key `x` (so the note height) at position
 `i`.
+
+### Line 9
+
+This line defines the logic to modify the `i` variable, and thus change the horizontal position
+on the staff that will be updated.
+
+```python
+i+={'4':2,b:0}.get(c,1)
+```
+
+The line increments `i` with the output from the statement `{'4':2,b:0}.get(c,1)`.
+This retrieves the value from a dictionary using the `get` method, which returns the second
+argument if no matching key is found. Here, lookup is done using the `c` value, so the current character that
+was printed on the staff. 
+
+The dictionary for the loopup created using `{'4':2,b:0}` only contains two entries, so for the majority of the
+symbols that are printed the lookup fails and thus the default value of `1` is returned. So. normally the
+`i` variable is incremented with `1` and the next symbol will be printed in the next column.
+
+Two special cases are encoded in the dictionary.
+
+1. For the character `4` the increment is `2`. thjs adds more space after a quarter note.
+2. For the `|` character (the value of `b`) the increment is `0`.
+
+This last case means that when the `|` symbols is the current symbol, there is no horizontal advancement.
+This is used to print the `|` vertically. 
+
+This now also explains the `replace` part of the `n` definition on line 2.
+
+```python
+n='...'.replace(b, '|ECAF d')
+```
+
+Here, we replace every occurence of the `|` in the original string, with the longer string `|ECAf d`.
+
+When we take the compression logic in to account we see that this comes down to the following sequence
+of `c` and `x` and `i` deltas.
+
+```
+c x i_delta
+-----------
+| E 0
+| C 0
+| A 0
+| f 0
+  d 1
+```
+
+The last two characters of the replacement define the ` ` (empty space) and the note height `d`.
+These two characters end the vertical `|` line with an empty space character and will increment the `i` 
+variable with `1`.
+
+
+
+
