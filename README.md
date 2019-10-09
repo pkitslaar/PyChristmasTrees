@@ -2,9 +2,15 @@
 
 A collection of Python tweet size snippets that output something fun like **Christmas trees**
 
+## Christmas 2018
+
+[code](2018.py) | description not yet
+
+![Animated GIF of 2018.py console output](2018.gif)
+
 ## Christmas 2017
 
-[code](christmas2017.py) | description coming soon!
+[code](christmas2017.py) | [description](christmas2017.md)
 
 ![Animated GIF of christmas2017.py console output](christmas2017.gif)
 
