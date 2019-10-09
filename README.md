@@ -2,7 +2,7 @@
 
 A collection of Python tweet size snippets that output something fun like **Christmas trees**
 
-## Christmas 2018
+## End of 2018
 
 [code](2018.py) | description not yet
 
