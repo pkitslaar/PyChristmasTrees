@@ -2,6 +2,12 @@
 
 A collection of Python tweet size snippets that output something fun like **Christmas trees**
 
+## Happy 2020
+
+[code](happy2020.py) | description not yet
+
+![Animated GIF of happy2020.py console output](happy2020.gif)
+
 ## End of 2018
 
 [code](2018.py) | description not yet
