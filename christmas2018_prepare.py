@@ -54,9 +54,7 @@ class GridCoords(object):
                 neighbours_y.append(center_y+offset_y)
                 neighbours_x.append(center_x+offset_x)
         return GridCoords(shape, (np.array(neighbours_y), np.array(neighbours_x)))
-
-
-bmp = scipy.ndimage.imread('2018.bmp', mode='P').astype(np.int)
+bmp = scipy.ndimage.imread('christmas2018_text3.bmp', mode='P').astype(np.int)
 CHAR_TABLE = {225: ' ', 182: '-', 139: '?', 0: '#'}
 
 def print_grid(g, table = CHAR_TABLE):
