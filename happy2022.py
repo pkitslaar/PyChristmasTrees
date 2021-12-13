@@ -1,20 +1,5 @@
-import time
-import itertools
-r,P=range,itertools.product
-glider = [8,4,28,0,0,0,0,0]
-
-# .1. = 2
-# 111 = 7
-# 111 = 7
-
-N,a=(-1,2),'1'
-g=[[*f'{(2**14)*b+(2**5)*b:040b}']for b in [0,0,0,0,0,0,0,0,0,2,7,7,0,0,0,0,0,0,0,0]]
-n=[i[:]for i in g];n[0][0]='1'
-while n!=g:
- [print(''.join(r))for r in g]
- for y,x in P(r(20),r(40)): 
-  z,S=g[y][x]==a,sum(g[(y+v)%19][(x+u)%39]==a for v,u in P(r(*N),r(*N)))
-  n[y][x]='.1'[(z and S in(3,4))or(not z and S==3)]
- g,n=n,g
- print()
- time.sleep(0.1)
+n,P={},lambda H,W,h=0,w=0:[(h+i//W,w+i%W)for i in range(W*H)]
+g=dict(zip(P(3,3,9,10),map(int,f'{191:b}')));G=lambda x:g.get(x,0)
+while 1:
+ for p in P(20,40):y,x=p;V,S=G(p),sum(map(G,P(3,3,y-1,x-1)));n[p]=(V&(S in(3,4)))|((not V)&(S==3));print('.*'[n[p]],end='\n'*(x==39))
+ g={**n}
