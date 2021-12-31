@@ -2,6 +2,13 @@
 
 A collection of Python tweet size snippets that output something fun like **Christmas trees**
 
+## Bye 2021
+
+[code](bye2021.py) | description not yet
+
+![Animated GIF of bye20201.py console output](bye2021.gif)
+
+
 ## Inject 2021
 
 [code](inject2021.py) | description not yet
