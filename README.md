@@ -6,7 +6,7 @@ A collection of Python tweet size snippets that output something fun like **Chri
 
 [code](inject2021.py) | description not yet
 
-![Movie of inject20201.py console output](inject2021recording.mp4)
+![Animated GIF of inject20201.py console output](inject2021.gif)
 
 ## Happy 2020
 
