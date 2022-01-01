@@ -4,7 +4,7 @@ A collection of Python tweet size snippets that output something fun like **Chri
 
 ## Bye 2021
 
-[code](bye2021.py) | description not yet
+[code](bye2021.py) | [description](bye2021.md)
 
 ![Animated GIF of bye20201.py console output](bye2021.gif)
 
