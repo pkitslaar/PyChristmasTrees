@@ -31,11 +31,13 @@
 """
 import time
 I=0
-r,D,J=range,dict(zip("HVLlT",[4*"#",4*"*,","*,*,**"," *, *,**"," *,**, *"])),32
-g={y:''for y in r(J)}
+#HVLlT
+#01234
+r,D,J,g=range,[4*"#",4*"*,","*,*,**"," *, *,**"," *,**, *"],32,{}
 u=g.update
-for b in"HTHHLHlHHVHHLHlH":
+for b in"0400203001002030":
+ l=D[int(b)].split(',')[:4]
  for y in r(J):
-  u({j:''for j in r(y+1)});u({y-j:v for j,v in enumerate(D[b].split(','))})
-  for y in r(32):print(g[y])
- J=min(p for p,v in g.items()if v and p>-1)
+  u({j:''for j in r(y+1)});u({y-j:v for j,v in zip(r(4),l)})
+ for y in r(32):print(g.get(y,''))
+ J-=len(l)
