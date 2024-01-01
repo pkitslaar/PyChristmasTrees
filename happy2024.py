@@ -14,4 +14,3 @@ for i in r(242):
  for H in r(1,11):
   print(''.join(G((x,H),s).replace('#','█ '[i<241])for x in r(-1,W+4)))
  g=n
- import time;time.sleep(0.05)
