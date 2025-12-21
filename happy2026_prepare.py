@@ -160,37 +160,71 @@ if __name__ == "__main__":
     B_str = f"{''.join(character_connections_bits.keys())}"
     C_str = f"{''.join(character_connections_bits.values())}"
 
-    T_help_str = "".join(TARGET_GRID[(x, y)] for y in range(GRID_SIZE_Y) for x in range(GRID_SIZE_X))
+    CLEAR_SCREEN_CODE = '\033[2J'
+    CURSOR_HOME_CODE = '\033[H'
+    HIDE_CURSOR_CODE = '\033[?25l'
+    SHOW_CURSOR_CODE = '\033[?25h'
+    COLOR_RESET_CODE = '\033[0m'
+    COLOR_GREEN_CODE = '\033[92m'
+    COLOR_RED_CODE = '\033[91m'
+    COLOR_GOLD_CODE = '\033[93m'
+
+    #T_help_str = "".join(TARGET_GRID[(x, y)] for y in range(GRID_SIZE_Y) for x in range(GRID_SIZE_X))
+    #T_help_str = '─┐┌─┐─┐┌─┐┌┘│ │┌┘├─┐└─└─┘└─└─┘'
+    T_help_str = '─┐┌─┐─┐┌─┐\\n┌┘│ │┌┘├─┐\\n└─└─┘└─└─┘'
+    
     #T_str = f"{{(i%{X_str},i//{X_str}):c for i,c in e(\"{T_help_str}\")}}"
     T_str = f"[*'{T_help_str}']"
     #PY.append()
     #G_str = "{k:' 'for k in T}"
-    G_str = f"[*' '*{len(T_help_str)}]"
+    G_str = f"[' ']*32"
     #PY.append(f"G={G_str}")
 
-    PY.append(f"N,R,T,G=[0],1,{T_str},{G_str}")
+    B_str = "├─│┌┐└┘"##$%&()@!^"  # extra chars to avoid mod bias
+
+    PY.append(f"R,T,G,P,r=0,{T_str},{G_str},print,range")
+    PY.append(f"G[10]=G[21]='\\n';P('{CLEAR_SCREEN_CODE}{HIDE_CURSOR_CODE}')")
+
+    #PY.append(f"N,R,T=[0],1,{T_str}")
+    #PY.append(f"G=[' \\n'[c=='\\n'] for c in T]")
 
 
-    print_helper_str = ""
+    #print_helper_str = ""
     #print_helper_str = "import time;time.sleep(0.01);print('\033[H',end='');"
     #print_helper_str = "P('\033[H',end='');"
-    print_grid_str = f"def O(g):{print_helper_str}[print(c,end=''if (i+1)%{X_str} else'\\n')for i,c in enumerate(g)]"    
-    PY.append(f"{print_grid_str}")
-    #PY.append("P(T)")
+    #print_grid_str = f"def O(g):{print_helper_str}[print(c,end=''if (i+1)%{X_str} else'\\n')for i,c in enumerate(g)]"    
+    #print_grid_str = f"def O(g):{print_helper_str}print(''.join(g))"    
+    #PY.append(f"{print_grid_str}")
+    #PY.append("O(T);print(len(T))")
+
+
+
+    #PY.append(f"")  # hide cursor
+
+    #PY.append("O(G);print(len(G))")
 
     #PY.append(f"N=[(0,0)]")
-    PY.append("while G!=T:")
-    PY.append(" p=N.pop(0)")
-    PY.append(" if G[p]!=T[p]:")
-    PY.append(f"  G[p]='{B_str}'[R%{len(B_str)}];R+=1")
+    PY.append(f"while G!=T:")
+    #PY.append(f" p=N.pop(0);R+=1")
+    PY.append(f" p=R%{len(eval(T_str))};R+=15")
+    PY.append(f" if G[p]!=T[p]:")
+    PY.append(f"  G[p]='{B_str}'[R%{len(B_str)}]")
     #PY.append(" N.extend(q for q in T if G[q]!=T[q] and abs(q[0]-p[0])+abs(q[1]-p[1])==1) ")
-    PY.append(f" N.extend(q for q in range({len(T_help_str)}) if G[q]!=T[q])")# and abs(q-p)==1) ")
+    #PY.append(f" N+=[q for q in r({len(eval(T_str))})if G[q]!=T[q]]")# and abs(q-p)==1) ")
     #PY.append(" for dx,dy in[(-1,0),(1,0),(0,-1),(0,1)]:")
     #PY.append("  q=p[0]+dx,p[1]+dy")
     #PY.append("  if (q)in G and G[q]!=T[q]:")
     #PY.append("   N.append(q)")
+    
     #PY.append("   N+=[q]") 
-    PY.append(" O(G)")
+    delay_Str = ""
+    delay_Str = ";sum(r(20<<17))"
+    #delay_Str = ";import time as t;t.sleep(0.05)"
+    #PY.append(f" P('{CURSOR_HOME_CODE}'+''.join(G)){delay_Str}")  # delay
+    PY.append(f" P('{CURSOR_HOME_CODE}',*[[c,f'\033[9{{p%5}}m{{c}}{COLOR_RESET_CODE}',c][c==t] for c,t in zip(G,T)],sep=''){delay_Str}")  # delay
+    #PY.append(" O(G)")
+    PY.append(f"P('{SHOW_CURSOR_CODE}')")  # show cursor
+    #PY.append(" O(T)")
 
 
 
