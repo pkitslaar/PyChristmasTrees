@@ -112,18 +112,38 @@ def solve(seed, plot=False):
         plot_grid(grid)
     return grid
 
-if __name__ == "__main__":
-    print("\033[?25h", end="")
+def solve_simple(seed, plot=False):
+    random.seed(seed)
+    T = TARGET_GRID
+    G = {}.fromkeys(TARGET_GRID, ' ')
+    N=[(0,0)]
+    while G!=T and N:
+        p=N.pop(0)
+        if G[p]!=T[p]:
+            G[p] = random.choice(box_drawing_characters)
+        N.extend(q for q in T if G[q]!=T[q] and abs(q[0]-p[0])+abs(q[1]-p[1])==1)
+        #for dx,dy in[(-1,0),(1,0),(0,-1),(0,1)]:
+        #    q=p[0]+dx,p[1]+dy
+        #    if (q)in G and G[q]!=TARGET_GRID[q]:
+        #        N.append(q)
+        if plot:
+            plot_grid(G)
+    if plot:
+        plot_grid(G)
+    return G
 
-    draw = True
-    seed = 121
-    while True:
-        result_grid = solve(seed, plot=False)
+if __name__ == "__main__":
+    #print("\033[?25h", end="")
+
+    draw = False
+    seed = 123
+    while False:
+        result_grid = solve_simple(seed, plot=False)
         if all(result_grid.get(pos) == TARGET_GRID[pos] for pos in TARGET_GRID):
             if draw:
                 # clear screen
                 print("\033[2J", end="")  # Clear screen
-                solve(seed, plot=True)
+                solve_simple(seed, plot=False)
                 # show cursor
             print("\033[?25h", end="")
             print(f"Solved with seed {seed}!")
@@ -134,34 +154,60 @@ if __name__ == "__main__":
     # final solution
     PY = []
     S_str = str(seed)
+    #PY.append(f"import random as R;R.seed({S_str});")
     X_str = str(GRID_SIZE_X)
     Y_str = str(GRID_SIZE_Y)
     B_str = f"{''.join(character_connections_bits.keys())}"
     C_str = f"{''.join(character_connections_bits.values())}"
-    PY.append(f"e,S,X,Y,B,C=enumerate,{S_str},{X_str},{Y_str},'{B_str}','{C_str}'")
 
     T_help_str = "".join(TARGET_GRID[(x, y)] for y in range(GRID_SIZE_Y) for x in range(GRID_SIZE_X))
-    T_str = f"{{(i%X,i//X):c for i,c in e(\"{T_help_str}\")}}"
-    PY.append(f"T={T_str}")
-    G_str = "{}.fromkeys(T, ' ')"
-    PY.append(f"G={G_str}")
+    #T_str = f"{{(i%{X_str},i//{X_str}):c for i,c in e(\"{T_help_str}\")}}"
+    T_str = f"[*'{T_help_str}']"
+    #PY.append()
+    #G_str = "{k:' 'for k in T}"
+    G_str = f"[*' '*{len(T_help_str)}]"
+    #PY.append(f"G={G_str}")
 
-    print_grid_str = "def P(g):[print(c, end=''if (i+1)%X else'\\n')for i,c in e(g.values())]"    
+    PY.append(f"N,R,T,G=[0],1,{T_str},{G_str}")
+
+
+    print_helper_str = ""
+    #print_helper_str = "import time;time.sleep(0.01);print('\033[H',end='');"
+    #print_helper_str = "P('\033[H',end='');"
+    print_grid_str = f"def O(g):{print_helper_str}[print(c,end=''if (i+1)%{X_str} else'\\n')for i,c in enumerate(g)]"    
     PY.append(f"{print_grid_str}")
-    PY.append("P(T)")
+    #PY.append("P(T)")
+
+    #PY.append(f"N=[(0,0)]")
+    PY.append("while G!=T:")
+    PY.append(" p=N.pop(0)")
+    PY.append(" if G[p]!=T[p]:")
+    PY.append(f"  G[p]='{B_str}'[R%{len(B_str)}];R+=1")
+    #PY.append(" N.extend(q for q in T if G[q]!=T[q] and abs(q[0]-p[0])+abs(q[1]-p[1])==1) ")
+    PY.append(f" N.extend(q for q in range({len(T_help_str)}) if G[q]!=T[q])")# and abs(q-p)==1) ")
+    #PY.append(" for dx,dy in[(-1,0),(1,0),(0,-1),(0,1)]:")
+    #PY.append("  q=p[0]+dx,p[1]+dy")
+    #PY.append("  if (q)in G and G[q]!=T[q]:")
+    #PY.append("   N.append(q)")
+    #PY.append("   N+=[q]") 
+    PY.append(" O(G)")
 
 
-    for l in PY:
-        try:
-             exec(l)
-        except Exception as e:
-            print(f"Error executing line: {l}")
-            raise e
 
-
+    
     PY_SOURCE = "\n".join(PY)
-    print(PY_SOURCE)
+    print(PY_SOURCE.replace('\033', '\\033'))
+
+  
+
+    exec(PY_SOURCE)
+
+
+    with open("happy2026.py", "wb") as f:
+        f.write(PY_SOURCE.encode("utf-8"))
+
+    print("\n--- Generated Source Code ---\n")
+
     print(len(PY_SOURCE))
 
-    assert T == TARGET_GRID
-
+    print(PY_SOURCE.replace('\033', '\\033'))
