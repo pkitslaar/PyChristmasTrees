@@ -4,7 +4,7 @@ A collection of Python tweet size snippets that output something fun like **Chri
 
 ## Happy 2026
 
-[code](happy2026.py) | no description yet 
+[code](happy2026.py) | [description](happy2026.md)
 
 ![Animated GIF of happy2026.py console output](happy2026.gif)
 
